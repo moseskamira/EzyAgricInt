@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:gravity="center"
-        android:text="FARMER HELP CENTER"
+        android:text="@string/farmer_help_center"
         android:textSize="24sp" />
 
     <LinearLayout
@@ -31,7 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Land Shape:"
+                android:text="@string/land_shape"
                 android:textSize="18sp" />
 
             <Spinner
@@ -52,7 +52,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Input Amount:"
+                android:text="@string/input_amount"
                 android:textSize="18sp" />
 
             <TextView
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Save"
+            android:text="@string/save"
             android:textColor="#000000"
             android:textSize="16sp" />
 
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:text="View Land Shapes"
+            android:text="@string/view_land_shapes"
             android:textColor="#000000"
             android:textSize="16sp" />
 

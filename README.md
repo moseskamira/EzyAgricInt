@@ -1,5 +1,5 @@
 # EzyAgricInt
-This Repo is for Interview Purposes
+This Repo is for Interview Purposes Only
 
 
 ### Home Screen

@@ -45,7 +45,7 @@ public class LandShapeAdapter extends RecyclerView.Adapter<LandShapeAdapter.Land
         return landShapeList.size();
     }
 
-    public class LandShapeViewHolder  extends RecyclerView.ViewHolder{
+    public static class LandShapeViewHolder  extends RecyclerView.ViewHolder{
 
         TextView landShapeNameTv;
         TextView inputAmountTv;

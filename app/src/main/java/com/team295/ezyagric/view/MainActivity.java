@@ -1,4 +1,4 @@
-package com.team295.ezyagric;
+package com.team295.ezyagric.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.team295.ezyagric.R;
 import com.team295.ezyagric.RoomDB.LandShape;
 import com.team295.ezyagric.RoomDB.LandShapeDB;
 import com.team295.ezyagric.adapter.LandShapeAdapter;
@@ -113,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         landShape.inputAmount = landShapeInputAmount;
         landShapeDB = LandShapeDB.getLandShapeDBInstance(getApplicationContext());
         landShapeDB.getLandShapeDAO().insertlandShape(landShape);
+        Toast.makeText(MainActivity.this, "Save Successfully ", Toast.LENGTH_LONG).show();
 
     }
 
