@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">EzyAgric</string>
+    <string name="view_land_shapes">View Land Shapes</string>
+    <string name="save">Save</string>
+    <string name="input_amount">Input Amount:</string>
+    <string name="land_shape">Land Shape:</string>
+    <string name="farmer_help_center">FARMER HELP CENTER</string>
 
 
     <string-array name="land_shape_array">
