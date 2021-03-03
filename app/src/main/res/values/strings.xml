@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">EzyAgric</string>
+
+
+    <string-array name="land_shape_array">
+        <item>One Acre Land</item>
+        <item>Five Acre Land</item>
+        <item>Seven Acre Land</item>
+    </string-array>
+</resources>
