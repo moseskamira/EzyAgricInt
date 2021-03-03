@@ -15,4 +15,5 @@ public interface LandShapeDAO {
 
     @Query("SELECT * FROM landShapeTable")
     List<LandShape> fetchAllLandShapes();
+
 }
