@@ -1,6 +1,8 @@
 package com.team295.ezyagric.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,9 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.team295.ezyagric.R;
-import com.team295.ezyagric.RoomDB.LandShape;
-import com.team295.ezyagric.RoomDB.LandShapeDB;
+import com.team295.ezyagric.model.LandShape;
 import com.team295.ezyagric.adapter.LandShapeAdapter;
+import com.team295.ezyagric.viewModel.ShapeViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
     String selectedShape;
     String landShapeInputAmount;
-    private LandShapeDB landShapeDB;
 
-    private LandShapeAdapter landShapeAdapter;
+    private ShapeViewModel shapeViewModel;
 
 
     @Override
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        shapeViewModel = ViewModelProviders.of(this).get(ShapeViewModel.class);
         populateSpinner();
         saveShapeInputBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 saveToRoomDB();
             }
         });
-
         viewLandShapesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,12 +77,10 @@ public class MainActivity extends AppCompatActivity {
         final ArrayAdapter<CharSequence> landShapeAdapter = ArrayAdapter.createFromResource(
                 this, R.array.land_shape_array, R.layout.support_simple_spinner_dropdown_item);
         landShapeSpinner.setAdapter(landShapeAdapter );
-
         landShapeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedShape = parent.getItemAtPosition(position).toString();
-
                 switch (selectedShape) {
                     case "One Acre Land":
                         landShapeInputAmount = "650 KG";
@@ -112,26 +110,37 @@ public class MainActivity extends AppCompatActivity {
         LandShape landShape = new LandShape();
         landShape.landShape = selectedShape;
         landShape.inputAmount = landShapeInputAmount;
-        landShapeDB = LandShapeDB.getLandShapeDBInstance(getApplicationContext());
-        landShapeDB.getLandShapeDAO().insertlandShape(landShape);
-        Toast.makeText(MainActivity.this, "Save Successfully ", Toast.LENGTH_LONG).show();
-
+        shapeViewModel.postShape(landShape).observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if (!s.isEmpty()) {
+                    Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(MainActivity.this, "Failed To Save Shape", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void retrieveAllLandShapes() {
-        landShapeDB = LandShapeDB.getLandShapeDBInstance(getApplicationContext());
-        if (!landShapeDB.getLandShapeDAO().fetchAllLandShapes().isEmpty()) {
-            landShapeList = landShapeDB.getLandShapeDAO().fetchAllLandShapes();
-            initializeRecyclerView(landShapeList);
-        } else {
-            Toast.makeText(MainActivity.this, "No Saved Land Shapes", Toast.LENGTH_LONG).show();
-        }
+        shapeViewModel.returnLandShapes().observe(this, new Observer<List<LandShape>>() {
+            @Override
+            public void onChanged(List<LandShape> mylandShapeList) {
+                if (mylandShapeList.size()> 0) {
+                    landShapeList = mylandShapeList;
+                    initializeRecyclerView(landShapeList);
 
+                }else {
+                    initializeRecyclerView(landShapeList);
+                }
+
+            }
+        });
     }
 
     private void initializeRecyclerView(List<LandShape> myShapeList) {
         songsRecyclerView.setHasFixedSize(true);
-        landShapeAdapter = new LandShapeAdapter(this, myShapeList);
+        LandShapeAdapter landShapeAdapter = new LandShapeAdapter(this, myShapeList);
         landShapeAdapter.notifyDataSetChanged();
         songsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         songsRecyclerView.setAdapter(landShapeAdapter);

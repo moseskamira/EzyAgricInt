@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.team295.ezyagric.R;
-import com.team295.ezyagric.RoomDB.LandShape;
+import com.team295.ezyagric.model.LandShape;
 import java.util.List;
 
 public class LandShapeAdapter extends RecyclerView.Adapter<LandShapeAdapter.LandShapeViewHolder> {
