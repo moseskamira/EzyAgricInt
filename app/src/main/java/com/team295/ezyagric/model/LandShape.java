@@ -1,4 +1,4 @@
-package com.team295.ezyagric.RoomDB;
+package com.team295.ezyagric.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

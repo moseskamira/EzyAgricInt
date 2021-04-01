@@ -6,6 +6,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.team295.ezyagric.model.LandShape;
+import com.team295.ezyagric.repository.LandShapeDAO;
+
 @Database(entities = {LandShape.class}, version = 1, exportSchema = false)
 public abstract class LandShapeDB extends RoomDatabase {
 
