@@ -29,26 +29,18 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.land_shape_spinner)
     Spinner landShapeSpinner;
-
     @BindView(R.id.input_amount_tv)
     TextView landShapeInputAmountTv;
-
     @BindView(R.id.save_shape_btn)
     Button saveShapeInputBtn;
-
     @BindView(R.id.view_shape_btn)
     Button viewLandShapesBtn;
-
     @BindView(R.id.prod_list_recycler_view)
     RecyclerView songsRecyclerView;
-
     private List<LandShape> landShapeList;
-
     String selectedShape;
     String landShapeInputAmount;
-
     private ShapeViewModel shapeViewModel;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     private void populateSpinner() {
         final ArrayAdapter<CharSequence> landShapeAdapter = ArrayAdapter.createFromResource(
                 this, R.array.land_shape_array, R.layout.support_simple_spinner_dropdown_item);
-        landShapeSpinner.setAdapter(landShapeAdapter );
+        landShapeSpinner.setAdapter(landShapeAdapter);
         landShapeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -115,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(String s) {
                 if (!s.isEmpty()) {
                     Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(MainActivity.this, "Failed To Save Shape", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -125,22 +117,18 @@ public class MainActivity extends AppCompatActivity {
     private void retrieveAllLandShapes() {
         shapeViewModel.returnLandShapes().observe(this, new Observer<List<LandShape>>() {
             @Override
-            public void onChanged(List<LandShape> mylandShapeList) {
-                if (mylandShapeList.size()> 0) {
-                    landShapeList = mylandShapeList;
-                    initializeRecyclerView(landShapeList);
-
-                }else {
-                    initializeRecyclerView(landShapeList);
+            public void onChanged(List<LandShape> myLandShapeList) {
+                if (myLandShapeList.size() > 0) {
+                    landShapeList = myLandShapeList;
                 }
-
+                initializeRecyclerView();
             }
         });
     }
 
-    private void initializeRecyclerView(List<LandShape> myShapeList) {
+    private void initializeRecyclerView() {
         songsRecyclerView.setHasFixedSize(true);
-        LandShapeAdapter landShapeAdapter = new LandShapeAdapter(this, myShapeList);
+        LandShapeAdapter landShapeAdapter = new LandShapeAdapter(this, landShapeList);
         landShapeAdapter.notifyDataSetChanged();
         songsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         songsRecyclerView.setAdapter(landShapeAdapter);

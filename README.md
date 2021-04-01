@@ -1,5 +1,5 @@
 # EzyAgricInt
-This Repo is for Interview Purposes Only
+This Repo was intended for Interview Purposes Only where concepts such as Model View View Model and Room are implemented.
 
 
 ### Architecture Used

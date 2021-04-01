@@ -13,25 +13,23 @@ import com.team295.ezyagric.repository.LandShapeDAO;
 public abstract class LandShapeDB extends RoomDatabase {
 
     public abstract LandShapeDAO getLandShapeDAO();
-
-    private static LandShapeDB landShapeDB;
+    private static LandShapeDB landShapeDBInstance;
 
     public static LandShapeDB getLandShapeDBInstance(Context context) {
-
-        if (landShapeDB == null) {
+        if (landShapeDBInstance == null) {
             synchronized(LandShapeDB.class) {
-                if(landShapeDB == null) {
-                    landShapeDB = Room.databaseBuilder(context.getApplicationContext(),
-                            LandShapeDB.class, "LandShapeDatabase")
-                            .allowMainThreadQueries().build();
+                if(landShapeDBInstance == null) {
+                    landShapeDBInstance = Room.databaseBuilder(context.getApplicationContext(),
+                            LandShapeDB.class, "LandShapeDatabase").allowMainThreadQueries()
+                            .build();
                 }
             }
         }
-        return landShapeDB;
+        return landShapeDBInstance;
     }
 
     public void destroyDatabase() {
-        landShapeDB = null;
+        landShapeDBInstance = null;
     }
 
 }
