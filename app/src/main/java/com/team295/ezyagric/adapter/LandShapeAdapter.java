@@ -10,14 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.team295.ezyagric.R;
-import com.team295.ezyagric.model.LandShape;
+import com.team295.ezyagric.model.Land;
 
 import java.util.List;
 
 public class LandShapeAdapter extends RecyclerView.Adapter<LandShapeAdapter.LandShapeViewHolder> {
-    private List<LandShape> landShapeList;
+    private List<Land> landShapeList;
 
-    public LandShapeAdapter(Context context, List<LandShape> myList) {
+    public LandShapeAdapter(Context context, List<Land> myList) {
         this.landShapeList = myList;
     }
 
@@ -35,8 +35,8 @@ public class LandShapeAdapter extends RecyclerView.Adapter<LandShapeAdapter.Land
     @Override
     public void onBindViewHolder(@NonNull LandShapeAdapter.LandShapeViewHolder holder, int position) {
 
-        holder.landShapeNameTv.setText(landShapeList.get(position).landShape);
-        holder.inputAmountTv.setText(landShapeList.get(position).inputAmount);
+        holder.landShapeNameTv.setText(landShapeList.get(position).getShape());
+        holder.inputAmountTv.setText(landShapeList.get(position).getAmount());
     }
 
     @Override

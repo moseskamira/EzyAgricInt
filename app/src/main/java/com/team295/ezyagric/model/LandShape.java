@@ -15,4 +15,11 @@ public class LandShape {
     @ColumnInfo(name = "inputAmount")
     public String inputAmount;
 
+    public LandShape(@NonNull String shape, String amount) {
+        this.landShape = shape;
+        this.inputAmount = amount;
+    }
+
+    public LandShape() {
+    }
 }
