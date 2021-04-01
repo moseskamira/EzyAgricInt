@@ -3,6 +3,7 @@ package com.team295.ezyagric.viewModel;
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.team295.ezyagric.model.LandShape;
@@ -22,18 +23,17 @@ public class ShapeViewModel extends AndroidViewModel {
         landShapeDB = LandShapeDB.getLandShapeDBInstance(getApplication().getApplicationContext());
     }
 
-
-    public MutableLiveData<List<LandShape>> returnLandShapes() {
+    public LiveData<List<LandShape>> returnLandShapes() {
         List<LandShape> landShapes = landShapeDB.getLandShapeDAO().fetchAllLandShapes();
         if (!landShapes.isEmpty()) {
             landShapeMutableLiveData.postValue(landShapes);
-        }else {
+        } else {
             landShapeMutableLiveData.postValue(null);
         }
         return landShapeMutableLiveData;
     }
 
-    public MutableLiveData<String> postShape(LandShape shape) {
+    public LiveData<String> postShape(LandShape shape) {
         landShapeDB.getLandShapeDAO().insertLandShape(shape);
         landShapePostResponse.postValue("Successfully Saved Data");
         return landShapePostResponse;

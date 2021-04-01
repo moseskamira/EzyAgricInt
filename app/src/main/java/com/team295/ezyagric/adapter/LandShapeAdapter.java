@@ -11,14 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.team295.ezyagric.R;
 import com.team295.ezyagric.model.LandShape;
+
 import java.util.List;
 
 public class LandShapeAdapter extends RecyclerView.Adapter<LandShapeAdapter.LandShapeViewHolder> {
-    private Context context;
     private List<LandShape> landShapeList;
 
     public LandShapeAdapter(Context context, List<LandShape> myList) {
-        this.context = context;
         this.landShapeList = myList;
     }
 
@@ -45,7 +44,7 @@ public class LandShapeAdapter extends RecyclerView.Adapter<LandShapeAdapter.Land
         return landShapeList.size();
     }
 
-    public static class LandShapeViewHolder  extends RecyclerView.ViewHolder{
+    public static class LandShapeViewHolder extends RecyclerView.ViewHolder {
 
         TextView landShapeNameTv;
         TextView inputAmountTv;
