@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.team295.ezyagric.model.LandShape;
-import com.team295.ezyagric.RoomDB.LandShapeDB;
+import com.team295.ezyagric.repository.LandShapeDB;
 
 import java.util.List;
 

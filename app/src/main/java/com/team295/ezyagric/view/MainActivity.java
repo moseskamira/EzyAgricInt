@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.team295.ezyagric.R;
 import com.team295.ezyagric.model.LandShape;
+import com.team295.ezyagric.util.DataMapper;
+import com.team295.ezyagric.model.Land;
 import com.team295.ezyagric.adapter.LandShapeAdapter;
 import com.team295.ezyagric.viewModel.ShapeViewModel;
 
@@ -37,10 +39,11 @@ public class MainActivity extends AppCompatActivity {
     Button viewLandShapesBtn;
     @BindView(R.id.prod_list_recycler_view)
     RecyclerView songsRecyclerView;
-    private List<LandShape> landShapeList;
+    private List<Land> landShapeList;
     String selectedShape;
     String landShapeInputAmount;
     private ShapeViewModel shapeViewModel;
+    private DataMapper dataMapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         shapeViewModel = ViewModelProviders.of(this).get(ShapeViewModel.class);
+        dataMapper = new DataMapper();
         populateSpinner();
         saveShapeInputBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,10 +103,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveToRoomDB() {
-        LandShape landShape = new LandShape();
-        landShape.landShape = selectedShape;
-        landShape.inputAmount = landShapeInputAmount;
-        shapeViewModel.postShape(landShape).observe(this, new Observer<String>() {
+        Land myLand = new Land(selectedShape, landShapeInputAmount);
+        shapeViewModel.postShape(dataMapper.mapToEntity(myLand)).observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 if (!s.isEmpty()) {
@@ -119,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<LandShape> myLandShapeList) {
                 if (myLandShapeList.size() > 0) {
-                    landShapeList = myLandShapeList;
+                    landShapeList = dataMapper.mapFromEntityList(myLandShapeList);
                 }
                 initializeRecyclerView();
             }
@@ -133,5 +135,4 @@ public class MainActivity extends AppCompatActivity {
         songsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         songsRecyclerView.setAdapter(landShapeAdapter);
     }
-
 }
