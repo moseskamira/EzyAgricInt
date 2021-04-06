@@ -1,5 +1,5 @@
-# EzyAgricInt
-This Repo was intended for Interview Purposes Only where concepts such as Model View View Model and Room are implemented.
+# MVVM-Demo
+This Repo is intended to demo the implementation of the Model View ViewModel Architecture.
 
 
 ### Architecture Used
