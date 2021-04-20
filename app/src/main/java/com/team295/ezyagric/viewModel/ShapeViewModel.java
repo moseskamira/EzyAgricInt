@@ -38,4 +38,8 @@ public class ShapeViewModel extends AndroidViewModel {
         landShapePostResponse.postValue("Successfully Saved Data");
         return landShapePostResponse;
     }
+
+    public void onCleared() {
+        super.onCleared();
+    }
 }

@@ -2,7 +2,7 @@ package com.team295.ezyagric.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +21,7 @@ import com.team295.ezyagric.util.DataMapper;
 import com.team295.ezyagric.model.Land;
 import com.team295.ezyagric.adapter.LandShapeAdapter;
 import com.team295.ezyagric.viewModel.ShapeViewModel;
+import com.team295.ezyagric.viewModel.ShapeViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        shapeViewModel = ViewModelProviders.of(this).get(ShapeViewModel.class);
+        ShapeViewModelFactory shapeViewModelFactory = ShapeViewModelFactory
+                .returnFactoryInstance(getApplication());
+        shapeViewModel = new ViewModelProvider(this, shapeViewModelFactory)
+                .get(ShapeViewModel.class);
         dataMapper = new DataMapper();
         populateSpinner();
         saveShapeInputBtn.setOnClickListener(new View.OnClickListener() {
