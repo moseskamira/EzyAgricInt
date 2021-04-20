@@ -124,10 +124,12 @@ public class MainActivity extends AppCompatActivity {
         shapeViewModel.returnLandShapes().observe(this, new Observer<List<LandShape>>() {
             @Override
             public void onChanged(List<LandShape> myLandShapeList) {
-                if (myLandShapeList.size() > 0) {
+                if (myLandShapeList != null) {
                     landShapeList = dataMapper.mapFromEntityList(myLandShapeList);
+                    initializeRecyclerView();
+                } else {
+                    Toast.makeText(MainActivity.this, "No LandShape Available", Toast.LENGTH_SHORT).show();
                 }
-                initializeRecyclerView();
             }
         });
     }
